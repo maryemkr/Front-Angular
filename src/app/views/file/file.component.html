@@ -1,0 +1,7 @@
+<form>
+
+<input type="file" name="image" multiple (change)="selectImage($event)" enctype="multipart/form-data">
+<img [src] = "uri" >
+ <button type="submit" (click)="onSubmit()">upload</button>
+</form>
+

@@ -1,0 +1,37 @@
+<div class="container">
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-header">Ajouter une publication</h5>
+            <form id="formAccountSettings" #f="ngForm" [formGroup]="form">
+                <div class="card">
+                    <h5 class="card-header">Image publication </h5>
+                    <div class="card-body">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Télécharger une image</label>
+                            <input class="form-control" type="file" name="image" (change)="selectImage($event)" />
+                        </div>
+
+                    </div>
+                </div>
+                <label class="form-label">Titre</label>
+                <input type="text" name="title" formControlName="title" class="form-control">
+                <label class="form-label">Type</label>
+                <select id="timeZones" class="select2 form-select" formControlName="type" name="type">
+                    <option value="actualités">Actualités</option>
+                    <option value="événements">Evénements</option>
+                </select>
+                <label class="form-label">Message</label>
+                <div>
+        
+                  <angular-editor [placeholder]="'Décrivez votre publication..'" formControlName="message"
+                    name="message">
+                  </angular-editor>
+                </div>
+                <div class="mt-2">
+                  <button type="submit" class="btn btn-primary me-2" (click)="ajoutPub(f)">Ajouter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

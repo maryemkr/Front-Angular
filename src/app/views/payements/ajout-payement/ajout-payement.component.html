@@ -1,0 +1,73 @@
+
+<div class="container">
+  
+    <div class="card mb-4">
+      <div class="card-body">
+        <form #f="ngForm" [formGroup]="payment">
+          <div class="mb-3">
+            <label class="form-label">Entrerise </label>
+            <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example"
+              formControlName="entreprise">
+              
+              <option *ngFor="let item of dataArray" value={{item._id}} >
+                {{item.name}}
+              </option>
+            </select>
+          </div>
+         
+          <div class="mb-3">
+            <label class="form-label">Durée par mois </label>
+            <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example"
+              formControlName="duration">
+              <option value="1"> 1 mois </option>
+              <option value="3"> 3 mois </option>
+              <option value="6"> 6 mois </option>
+              <option value="12"> 12 mois </option>
+            </select>
+          </div>
+          <div class="mb-3">
+            <label class="form-label">Sélectionnez le montant </label>
+            <select class="form-select" id="exampleFormControlSelect1" aria-label="Default select example"
+              formControlName="amount">
+              <option value="30">30 dinars</option>
+              <option value="80"> 80 dinars</option>
+              <option value="150"> 150 dinars</option>
+              <option value="280">280 dinars</option>
+            </select>
+          </div>
+         
+         
+
+          <div class="mb-3 row">
+            <label class="form-label">Date paiement</label>
+            <div class="col-md-10">
+              <input class="form-control" formControlName="paymentDate" type="date" id="html5-date-input" />
+            </div>
+          </div>
+
+        
+
+
+
+
+          <button type="submit"  class="btn btn-info" (click)="addCash(f)">ajouter</button>
+
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -1,0 +1,74 @@
+<app-header></app-header>
+<section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-center justify-content-center">
+      <div class="col-md-9  text-center">
+        <h1 class="mb-2 bread">{{dataArray.name}}</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 ">
+        <h2 class="mb-3">{{dataArray.name}}</h2>
+        <p>
+          <img [src]="dataArray.image" alt="" class="img-fluid">
+        </p>
+        <p [innerHTML]="dataArray.description">{{dataArray.description}}</p>
+
+
+
+
+   
+      </div> <!-- .col-md-8 -->
+
+      <div class="col-lg-4 sidebar ">
+        <div class="sidebar-box">
+          <form action="#" class="search-form">
+            <div class="form-group">
+              <span class="icon icon-search"></span>
+              <input type="text" class="form-control" placeholder="Tapez un mot-clé">
+            </div>
+          </form>
+        </div>
+       
+
+
+
+
+
+        <div class="sidebar-box ">
+          <h3>Evènement récente</h3>
+          <div class="block-21 mb-4 d-flex" *ngFor="let item of dataArray2  ; index as i" >
+            <a class="blog-img mr-4" style="background-image: url({{item.image}});" *ngIf="i<4"></a>
+            <div class="text">
+              <h3 class="heading"><a>{{item.name}}</a>
+              </h3>
+              <div class="meta">
+                <div><a href="#"><span class="icon-calendar"></span> {{item.date | date}}</a></div>
+                <div><a href="#"><span class="icon-location_city"></span> {{item.city}}</a></div>
+                
+              </div>
+            </div>
+          </div>       
+        
+        </div>
+      </div><!-- END COL -->
+    </div>
+  </div>
+</section>
+
+
+<!-- Button trigger modal -->
+
+
+
+
+
+
+
+<app-footer></app-footer>

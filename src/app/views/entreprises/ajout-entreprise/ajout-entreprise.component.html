@@ -1,0 +1,151 @@
+<div class="container">
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h5 class="card-header">Ajouter une entreprise</h5>
+      <form id="formAccountSettings" #f="ngForm" [formGroup]="form">
+        <div class="card">
+          <h5 class="card-header">Logo entreprise </h5>
+          <div class="card-body">
+            <div class="mb-3">
+              <label for="formFile" class="form-label">Télécharger une image</label>
+              <input class="form-control" type="file" name="image" (change)="selectImage($event)" />
+            </div>
+
+          </div>
+        </div>
+        <div class="row">
+          <div class="mb-3 col-md-6">
+            <label class="form-label">Nom Entreprise </label>
+            <input formControlName="name" class="form-control" type="text" name="name" autofocus />
+          </div>
+          <div class="alert alert-danger" *ngIf="form.get('name').touched && form.get('name').hasError('required')">Vous
+            devez remplir ce champ </div>
+
+          <div class="mb-3 col-md-6">
+            <label class="form-label">Nom Commerciale </label>
+            <input formControlName="commercialName" class="form-control" type="text" name="commercialName" autofocus />
+          </div>
+          <div class="alert alert-danger"
+            *ngIf="form.get('commercialName').touched && form.get('commercialName').hasError('required')">Vous devez
+            remplir ce champ </div>
+
+
+          <div class="mb-3 col-md-6">
+            <label class="form-label">Téléphone</label>
+            <div class="input-group input-group-merge">
+              <span class="input-group-text">TN (+216)</span>
+              <input type="text" name="telephone" class="form-control" formControlName="telephone" required />
+            </div>
+          </div>
+          <div class="alert alert-danger"
+            *ngIf="form.get('telephone').touched && form.get('telephone').hasError('required')">Vous devez remplir ce
+            champ </div>
+
+          <div class="mb-3 col-md-6">
+            <label class="form-label">Fax</label>
+            <input type="text" class="form-control" name="fax" placeholder="231465" formControlName="fax" />
+          </div>
+
+          <div class="mb-3 col-md-6">
+            <label class="form-label">Site Web</label>
+            <input type="text" class="form-control" name="webSite" formControlName="webSite" />
+          </div>
+
+
+
+          <div class="mb-3 col-md-6">
+            <label class="form-label">Ville</label>
+            <select id="timeZones" class="select2 form-select" formControlName="city" name="city">
+              <option value="">Selectionner une ville</option>
+              <option value="ariana"> Ariana</option>
+              <option value="Béja"> Béja</option>
+              <option value="Ben Arous"> Ben Arous</option>
+              <option value="Bizerte"> Bizerte</option>
+              <option value="Gabès"> Gabès</option>
+              <option value="Gafsa"> Gafsa</option>
+              <option value="Jendouba"> Jendouba</option>
+              <option value="Kairouan"> Kairouan</option>
+              <option value="Kasserine"> Kasserine</option>
+              <option value="Kébili"> Kébili</option>
+              <option value="Le Kef"> Le Kef</option>
+              <option value="Mahdia"> Mahdia</option>
+              <option value="La Manouba"> La Manouba</option>
+              <option value="Médenine"> Médenine</option>
+              <option value="Monastir"> Monastir</option>
+              <option value="Nabeul"> Nabeul</option>
+              <option value="Sfax"> Sfax</option>
+              <option value="Sidi Bouzid"> Sidi Bouzid</option>
+              <option value="Sfax"> Sfax</option>
+              <option value="Siliana"> Siliana</option>
+              <option value="Sousse"> Sousse</option>
+              <option value="Tataouine"> Tataouine</option>
+              <option value="Tozeur"> Tozeur</option>
+              <option value="Tunis"> Tunis</option>
+              <option value="Zaghouan"> Zaghouan</option>
+            </select>
+          </div>
+          <div class="alert alert-danger" *ngIf="form.get('city').touched && form.get('city').hasError('required')">Vous
+            devez remplir ce champ
+          </div>
+          <div class="mb-3 col-md-6">
+            <label class="form-label">Addresse</label>
+            <input type="text" class="form-control" name="address" placeholder="address" formControlName="address" />
+          </div>
+          <div class="alert alert-danger"
+            *ngIf="form.get('address').touched && form.get('address').hasError('required')">Vous devez remplir ce champ
+          </div>
+
+          <div class="mb-3 col-md-6">
+            <label class="form-label">Forme juridique</label>
+            <input class="form-control" type="text" id="state" name="type" formControlName="type" required />
+          </div>
+          <div class="alert alert-danger" *ngIf="form.get('type').touched && form.get('type').hasError('required')">Vous
+            devez remplir ce champ
+          </div>
+          <div class="mb-3 col-md-6">
+            <label class="form-label">Catégorie</label>
+            <!-- <input type="text" class="form-control" name="category" placeholder="address" formControlName="category" /> -->
+            <select id="timeZones" class="select2 form-select" formControlName="category" name="category">
+              <option value="">Selectionner Catégory</option>
+              <option value="industriel"> INDUSTRIEL</option>
+              <option value="service"> SERVICE</option>
+              <option value="Commerce gros"> COMMERCE GROS</option>
+              <option value="commerce details"> COMMERCE DÉTAILS</option>         
+            </select>
+          </div>
+          <div class="mb-3 col-md-6">
+            <label class="form-label">sous category</label>
+            <!-- <input type="text" class="form-control" name="subCategory" 
+              formControlName="subCategory" /> -->
+              <select id="timeZones" class="select2 form-select" formControlName="subCategory" name="subCategory">
+                <option value="">Selectionner sous catégory</option>
+                <option value="Céramique"> Céramique</option>
+                <option value="Luminaires"> Luminaires</option>
+                <option value="Tapisserie"> Tapisserie</option>
+                <option value="Design Packaging"> Design Packaging</option>    
+                <option value="Artisans D'Art"> Artisans D'Art</option>
+                <option value="Habillement"> Habillement</option>
+                <option value="Cosmétiques et soins"> Cosmétiques et soins</option>        
+              </select>
+          </div>
+          <div class="mb-3 col-md-6">
+          <label class="form-label">Description</label>
+          <div>
+
+            <angular-editor [placeholder]="'Décrivez votre publication..'" formControlName="description"
+              name="description">
+
+            </angular-editor>
+          </div>
+          </div>
+          <div class="mt-2">
+            <button type="submit" class="btn btn-primary me-2" (click)="ajoutEntreprise(f)">Ajouter</button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<!-- Page JS -->
+<script src="/assets/js/pages-account-settings-account.js"></script>

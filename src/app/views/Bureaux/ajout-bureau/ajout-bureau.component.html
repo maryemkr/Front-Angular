@@ -1,0 +1,69 @@
+<div class="container">
+
+    <div class="card mb-4">
+        <div class="card-body">
+            <h5 class="card-header">Ajouter un bureau</h5>
+            <!-- Account -->
+
+            <form id="formAccountSettings" [formGroup]="myForm" #f="ngForm" (ngSubmit)="add(f)">
+                <div class="row">
+
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">N° Bureau</label>
+                        <input class="form-control" type="number" formControlName="deskNumber" name="deskNumber" />
+                    </div>
+                    <div class="alert alert-danger"
+                        *ngIf="myForm.get('deskNumber').touched && myForm.get('deskNumber').hasError('required')">
+                        Vous devez remplir ce champ </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">Téléphone</label>
+                        <input class="form-control" type="number" name="telephone" formControlName="telephone">
+                    </div>
+                    <div class="alert alert-danger"
+                        *ngIf="myForm.get('telephone').touched && myForm.get('telephone').hasError('required')  ">
+                        Vous devez remplir ce champ </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">Ville</label>
+                        <input type="text" class="form-control" name="city" formControlName="city" required />
+                    </div>
+
+                    <div class="alert alert-danger"
+                        *ngIf="myForm.get('city').touched && myForm.get('city').hasError('required')  ">
+                        Vous devez remplir ce champ </div>
+
+                    <div class="mb-3 col-md-6">
+                        <label for="firstName" class="form-label">Adresse</label>
+                        <input class="form-control" type="text" formControlName="address" name="address" autofocus
+                            minlength="3" />
+                    </div>
+                    <div class="alert alert-danger"
+                        *ngIf="myForm.get('address').touched && myForm.get('address').hasError('required')  "> Vous
+                        devez remplir ce
+                        champ
+                    </div>
+
+
+                    <div class="mb-3 col-md-6">
+                        <label class="form-label">Code postal</label>
+                        <input class="form-control" type="number" formControlName="postalCode" name="postalCode"
+                            minlength="3" />
+                    </div>
+                    <div class="alert alert-danger"
+                        *ngIf="myForm.get('postalCode').touched && myForm.get('postalCode').hasError('required')  ">
+                        Vous devez remplir ce champ </div>
+
+
+                    <div class="mt-2">
+                        <button type="submit" class="btn btn-primary me-2">Enregistrer</button>
+
+                    </div>
+                </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!-- Page JS -->
+<script src="/assets/js/pages-account-settings-account.js"></script>

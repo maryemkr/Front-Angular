@@ -1,0 +1,136 @@
+<app-header></app-header>
+<section class="hero-wrap hero-wrap-2" style="background-image: url('images/bg_1.jpg');">
+  <div class="overlay"></div>
+  <div class="container">
+    <div class="row no-gutters slider-text align-items-center justify-content-center">
+      <div class="col-md-9  text-center">
+        <h1 class="mb-2 bread">{{dataArray.title}}</h1>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ftco-section">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 ">
+        <h2 class="mb-3">{{dataArray.title}}</h2>
+        <p>
+          <img [src]="dataArray.image" alt="" class="img-fluid">
+        </p>
+        <p [innerHTML]="dataArray.message">{{dataArray.message}}</p>
+
+
+
+
+        <div class="pt-5 mt-5">
+          <h3 class="mb-5 h4 font-weight-bold"> Commentaires</h3>
+          <ul class="comment-list">
+            <li class="comment" *ngFor="let comment of comments ; index as i ">
+              <div class="vcard bio">
+                <img src="assets/images/user.jpg" alt="Image placeholder">
+              </div>
+              <div class="comment-body">
+                <h3>{{comment.commenterId.firstName}}</h3>
+                <div class="meta mb-2">{{comment.timestamp| date :'M/d/yy, h:mma'}}</div>
+                <p>{{comment.text}}</p>
+                <p><a href="#" data-bs-toggle="modal" data-bs-target="#modalCenter"
+                    *ngIf="user(comment.commenterId._id)"
+                    (click)="getData(comment._id,comment.text,comment.commenterId.firstName,comment.commenterId._id)"
+                    class="reply">Modifier</a>
+                </p>
+                <p><a *ngIf="user(comment.commenterId._id)" (click)="delete(comment._id,i)" class="reply">Supprimer</a>
+                </p>
+              </div>
+            </li>
+          </ul>
+          <!-- END comment-list -->
+
+          <div class="comment-form-wrap pt-5">
+            <h3 class="mb-5 h4 font-weight-bold">Ecrivez un commentaire</h3>
+            <form class="p-5 bg-light" [formGroup]="myForm" #f="ngForm" (ngSubmit)="add(f)">
+
+              <div class="form-group">
+
+                <textarea name="" id="message" cols="30" rows="10" class="form-control" name="text"
+                  formControlName="text" placeholder="Votre commentaire"></textarea>
+              </div>
+              <div class="form-group">
+                <input type="submit" value="Envoyer" class="btn py-3 px-4 btn-primary">
+              </div>
+            </form>
+          </div>
+        </div>
+      </div> <!-- .col-md-8 -->
+
+      <div class="col-lg-4 sidebar ">
+        <div class="sidebar-box">
+          <form action="#" class="search-form">
+            <div class="form-group">
+              <span class="icon icon-search"></span>
+              <input type="text" class="form-control" placeholder="Tapez un mot-clé ">
+            </div>
+          </form>
+        </div>
+
+
+        <div class="sidebar-box ">
+          <h3>Publications récente</h3>
+          <div class="block-21 mb-4 d-flex" *ngFor="let post of posts ; index as i ">
+            <a class="blog-img mr-4" style="background-image: url({{post.image}});" *ngIf="i<4"></a>
+            <div class="text">
+              <h3 class="heading"><a href="#" *ngIf="i<4" >{{post.title}}</a>
+              </h3>
+              <div class="meta">
+                <div  *ngIf="i<4"><a href="#"><span class="icon-calendar" ></span> {{post.createdAt | date}}</a></div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div><!-- END COL -->
+    </div>
+  </div>
+</section>
+
+
+<!-- Button trigger modal -->
+
+<!-- Modal -->
+<div class="modal fade" id="modalCenter" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="modalCenterTitle">Modifier votre commentaire</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+
+        <form #f="ngForm">
+
+          <div class="row g-2">
+            <div class="col mb-0">
+              <label for="emailWithTitle" class="form-label">Commentaire</label>
+              <input type="text" id="emailWithTitle" class="form-control" name="text" #text="ngModel" ngModel
+                [(ngModel)]="data.text" />
+            </div>
+
+          </div>
+          <button type="button" class="btn btn-primary" (click)="update(f)">Enregistrer</button>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button  type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+          Fermer
+        </button>
+
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<app-footer></app-footer>

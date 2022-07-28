@@ -1,0 +1,125 @@
+<div class="container">
+
+    <div class="card mb-4">
+      <div class="card-body">
+        <h5 class="card-header">Ajouter un adhérent</h5>
+        <!-- Account -->
+  
+        <form id="formAccountSettings" [formGroup]="myForm" #f="ngForm" (ngSubmit)="add(f)">
+          <div class="row">
+  
+            <div class="mb-3 col-md-6">
+              <label class="form-label">Pseudo</label>
+              <input class="form-control" type="text" formControlName="pseudo" name="pseudo" />
+            </div>
+            <div class="alert alert-danger" *ngIf="pseudoError">{{pseudoError}}</div>
+  
+            <div class="alert alert-danger"
+              *ngIf="myForm.get('pseudo').touched && myForm.get('pseudo').hasError('required')">
+              Vous devez remplir ce champ </div>
+  
+            <div class="mb-3 col-md-6">
+              <label class="form-label">Mot de passe</label>
+              <input class="form-control" type="password" name="password" formControlName="password" />
+            </div>
+            <div class="alert alert-danger"
+              *ngIf="myForm.get('password').touched && myForm.get('password').hasError('required')  ">
+              Vous devez remplir ce champ </div>
+            <div class="alert alert-danger"
+              *ngIf="myForm.get('password').touched &&  myForm.get('password').hasError('minlength')">
+              Le
+              mot de passe doit contenir minimum 3 caractéres </div>
+            <div class="mb-3 col-md-6">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-control" name="email" formControlName="email" required />
+            </div>
+  
+            <div class="alert alert-danger"
+              *ngIf="myForm.get('email').touched && myForm.get('email').hasError('required')  ">
+              Vous devez remplir ce champ </div>
+            <div class="alert alert-danger"
+              *ngIf="myForm.get('email').touched && myForm.get('email').hasError('email')  "> Ce
+              n'est pas un email</div>
+            <div class="mb-3 col-md-6">
+              <label for="firstName" class="form-label">Prénom</label>
+              <input class="form-control" type="text" formControlName="firstName" name="firstName" autofocus
+                minlength="3" />
+            </div>
+            <div class="alert alert-danger"
+              *ngIf="myForm.get('firstName').touched && myForm.get('firstName').hasError('required')  "> Vous devez
+              remplir ce
+              champ
+            </div>
+            <div class="alert alert-danger"
+              *ngIf="myForm.get('firstName').touched &&  myForm.get('firstName').hasError('minlength')"> Le prénom doit
+              contenir minimum 3 caractéres </div>
+  
+            <div class="mb-3 col-md-6">
+              <label class="form-label">Nom</label>
+              <input class="form-control" type="text" formControlName="name" name="name" minlength="3" />
+            </div>
+            <div class="alert alert-danger"
+              *ngIf="myForm.get('name').touched && myForm.get('name').hasError('required')  ">
+              Vous devez remplir ce champ </div>
+            <div class="alert alert-danger"
+              *ngIf="myForm.get('name').touched &&  myForm.get('name').hasError('minlength')">
+              Le
+              mot de passe doit contenir minimum 3 caractéres </div>
+        
+              <div class="mb-3 col-md-6">
+                <label class="form-label">Role</label>
+                <input class="form-control" type="text" formControlName="role" name="role" />
+              </div>
+  
+            <div class="mb-3 col-md-6">
+              <label class="form-label">Téléphone</label>
+              <div class="input-group input-group-merge">
+                <span class="input-group-text">US (+216)</span>
+                <input type="text" name="telephone" class="form-control" formControlName="telephone"
+                  placeholder="20 555 011" minlength="8" />
+              </div>
+            </div>
+            <div class="alert alert-danger"
+              *ngIf="myForm.get('telephone').touched && myForm.get('telephone').hasError('required')  "> Vous devez
+              remplir ce
+              champ </div>
+            <div class="alert alert-danger"
+              *ngIf="myForm.get('telephone').touched &&  myForm.get('telephone').hasError('minlength')"> Le mot de passe
+              doit
+              contenir minimum 8 caractéres </div>
+  
+  
+            <div class="mb-3 col-md-6">
+              <label class="form-label">Entreprise</label><br>
+              <select class="input-group input-group-merge" formControlName="entrepriseId">
+                <option class="form-control" *ngFor="let item of dataArray" value={{item._id}}>
+                  {{item.name}}
+                </option>
+              </select>
+            </div>
+            <div class="mb-3 col-md-6">
+              <label class="form-label">Bureau</label><br>
+              <select class="input-group input-group-merge" formControlName="deskId">
+                <option class="form-control" *ngFor="let item of dataArray2" value={{item._id}}>
+                  {{item.deskNumber}}
+                </option>
+              </select>
+            </div>
+            <!-- <div class="mb-3 col-md-6">
+              <label class="form-label">Bureau</label><br>
+              <select class="input-group input-group-merge" formControlName="deskId" >
+                </select>
+                </div> -->
+          </div>
+          <div class="mt-2">
+            <button type="submit" class="btn btn-primary me-2">Enregistrer</button>
+  
+          </div>
+  
+        </form>
+  
+      </div>
+    </div>
+  </div>
+  <!-- Page JS -->
+  <script src="/assets/js/pages-account-settings-account.js"></script>

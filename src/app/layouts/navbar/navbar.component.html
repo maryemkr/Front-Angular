@@ -1,0 +1,296 @@
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<style>
+  #btnScrollToTop {
+    position: fixed;
+    right: 10px;
+    bottom: 10px;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: blue;
+    display: none;
+  }
+</style>
+<script>
+  const btnScrollToTop = document.querySelector("#btnScrollToTop");
+
+  window.addEventListener("scroll", check)
+  function check() {
+    if (window.scrollY > 200) {
+      btnScrollToTop.style.display = "flex";
+    } else {
+      btnScrollToTop.style.display = "none";
+    }
+  }
+
+
+</script>
+<!-- Layout wrapper -->
+<div class="layout-wrapper layout-content-navbar">
+  <div class="layout-container">
+    <!-- Menu -->
+
+    <aside id="layout-menu" class="layout-menu menu-vertical menu bg-menu-theme">
+      <div class="app-brand demo">
+        <a href="index.html" class="app-brand-link">
+          <span class="app-brand-logo demo">
+            <img src="../assets/img/O.N.E.png" width="70px">
+
+          </span>
+          <span class="app-brand-text  menu-text fw-bolder ms-2 ">O.N.E</span>
+        </a>
+
+        <a href="javascript:void(0);" class="layout-menu-toggle menu-link text-large ms-auto d-block d-xl-none">
+          <i class="bx bx-chevron-left bx-sm align-middle"></i>
+        </a>
+      </div>
+
+      <div class="menu-inner-shadow"></div>
+
+      <ul class="menu-inner py-1">
+        <!-- Dashboard -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Statistiques</span></li>
+
+        <li class="menu-item active">
+          <a href="index.html" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="30">
+              <path d="M3 3v17a1 1 0 0 0 1 1h17v-2H5V3H3z" />
+              <path
+                d="M15.293 14.707a.999.999 0 0 0 1.414 0l5-5-1.414-1.414L16 12.586l-2.293-2.293a.999.999 0 0 0-1.414 0l-5 5 1.414 1.414L13 12.414l2.293 2.293z" />
+            </svg>
+            <div data-i18n="Analytics">Dashboard</div>
+          </a>
+        </li>
+        <!-- Tables -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Adhérents</span></li>
+        <li class="menu-item">
+          <a routerLink="/admin/adherents" class="menu-link">
+
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="30">
+              <path
+                d="M15 11h7v2h-7zm1 4h6v2h-6zm-2-8h8v2h-8zM4 19h10v-1c0-2.757-2.243-5-5-5H7c-2.757 0-5 2.243-5 5v1h2zm4-7c1.995 0 3.5-1.505 3.5-3.5S9.995 5 8 5 4.5 6.505 4.5 8.5 6.005 12 8 12z" />
+            </svg>
+            <div data-i18n="Tables">Les Adhérents</div>
+          </a>
+        </li>
+<div *ngIf="verif">
+        <li class="menu-header small text-uppercase"><span class="menu-header-text"> Paiements</span></li>
+
+        <li class="menu-item" >
+          <a routerLink="/admin/paiement" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="30" class="menu-icon tf-icons bx">
+              <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
+              <path
+                d="M12 11c-2 0-2-.63-2-1s.7-1 2-1 1.39.64 1.4 1h2A3 3 0 0 0 13 7.12V6h-2v1.09C9 7.42 8 8.71 8 10c0 1.12.52 3 4 3 2 0 2 .68 2 1s-.62 1-2 1c-1.84 0-2-.86-2-1H8c0 .92.66 2.55 3 2.92V18h2v-1.08c2-.34 3-1.63 3-2.92 0-1.12-.52-3-4-3z" />
+            </svg>
+            <div data-i18n="Tables">Les Paiements</div>
+          </a>
+        </li>
+      </div>
+        <li class="menu-header small text-uppercase"><span class="menu-header-text"> Messages</span></li>
+
+        <li class="menu-item">
+          <a routerLink="/admin/message" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="30">
+              <path
+                d="M20 2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h3v3.766L13.277 18H20c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm0 14h-7.277L9 18.234V16H4V4h16v12z" />
+              <circle cx="15" cy="10" r="2" />
+              <circle cx="9" cy="10" r="2" />
+            </svg>
+            <div data-i18n="Tables">Les Messages</div>
+            <span class="badge badge-center rounded-pill bg-label-success">{{dataArray.length}}</span>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a routerLink="/admin/chat" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="30">
+              <path
+                d="M20 2H4c-1.103 0-2 .897-2 2v12c0 1.103.897 2 2 2h3v3.767L13.277 18H20c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2zm0 14h-7.277L9 18.233V16H4V4h16v12z" />
+              <path d="M7 7h10v2H7zm0 4h7v2H7z" />
+            </svg>
+            <div data-i18n="Tables">Discussion</div>
+          </a>
+        </li>
+        <li class="menu-header small text-uppercase"><span class="menu-header-text"> Entreprises </span></li>
+
+        <li class="menu-item">
+          <a routerLink="/admin/entreprises" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="30">
+              <path
+                d="M3 5v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2zm7 2h8v2h-8V7zm0 4h8v2h-8v-2zm0 4h8v2h-8v-2zM6 7h2v2H6V7zm0 4h2v2H6v-2zm0 4h2v2H6v-2z" />
+            </svg>
+            <div data-i18n="Tables">Entreprises</div>
+          </a>
+        </li>
+
+
+        <li class="menu-header small text-uppercase"><span class="menu-header-text"> Bureaux </span></li>
+
+        <li class="menu-item">
+          <a routerLink="/admin/bureaux" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="30">
+              <path
+                d="M19 2H9c-1.103 0-2 .897-2 2v6H5c-1.103 0-2 .897-2 2v9a1 1 0 0 0 1 1h16a1 1 0 0 0 1-1V4c0-1.103-.897-2-2-2zM5 12h6v8H5v-8zm14 8h-6v-8c0-1.103-.897-2-2-2H9V4h10v16z" />
+              <path d="M11 6h2v2h-2zm4 0h2v2h-2zm0 4.031h2V12h-2zM15 14h2v2h-2zm-8 .001h2v2H7z" />
+            </svg>
+            <div data-i18n="Tables">Les Bureaux</div>
+          </a>
+        </li>
+
+
+
+        <!-- Components -->
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Membres</span></li>
+        <!-- Cards -->
+        <li class="menu-item">
+          <a routerLink="/admin/membres" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="30">
+              <path
+                d="M20.29 8.29 16 12.58l-1.3-1.29-1.41 1.42 2.7 2.7 5.72-5.7zM4 8a3.91 3.91 0 0 0 4 4 3.91 3.91 0 0 0 4-4 3.91 3.91 0 0 0-4-4 3.91 3.91 0 0 0-4 4zm6 0a1.91 1.91 0 0 1-2 2 1.91 1.91 0 0 1-2-2 1.91 1.91 0 0 1 2-2 1.91 1.91 0 0 1 2 2zM4 18a3 3 0 0 1 3-3h2a3 3 0 0 1 3 3v1h2v-1a5 5 0 0 0-5-5H7a5 5 0 0 0-5 5v1h2z" />
+            </svg>
+            <div data-i18n="Basic">Les administrateurs</div>
+          </a>
+        </li>
+        <li class="menu-header small text-uppercase"><span class="menu-header-text">Actualité &amp; Evénements</span>
+        </li>
+        <!-- Cards -->
+        <li class="menu-item">
+          <a routerLink="/admin/posts" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="30">
+              <path
+                d="M3 12c0 1.654 1.346 3 3 3 .794 0 1.512-.315 2.049-.82l5.991 3.424c-.018.13-.04.26-.04.396 0 1.654 1.346 3 3 3s3-1.346 3-3-1.346-3-3-3c-.794 0-1.512.315-2.049.82L8.96 12.397c.018-.131.04-.261.04-.397s-.022-.266-.04-.397l5.991-3.423c.537.505 1.255.82 2.049.82 1.654 0 3-1.346 3-3s-1.346-3-3-3-3 1.346-3 3c0 .136.022.266.04.397L8.049 9.82A2.982 2.982 0 0 0 6 9c-1.654 0-3 1.346-3 3z" />
+            </svg>
+            <div data-i18n="Basic">Les publications</div>
+          </a>
+        </li>
+        <li class="menu-item">
+          <a routerLink="/admin/events" class="menu-link">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="30">
+              <path
+                d="M10 3H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zm10 0h-6a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4a1 1 0 0 0-1-1zM10 13H4a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-6a1 1 0 0 0-1-1zm8 1h-2v2h-2v2h2v2h2v-2h2v-2h-2z" />
+            </svg>
+            <div data-i18n="Basic">Les évènements</div>
+          </a>
+        </li>
+      </ul>
+    </aside>
+    <!-- / Menu -->
+
+    <!-- Layout container -->
+    <div class="layout-page">
+      <!-- Navbar -->
+
+      <nav
+        class="layout-navbar container-xxl navbar navbar-expand-xl navbar-detached align-items-center bg-navbar-theme"
+        id="layout-navbar">
+        <div class="layout-menu-toggle navbar-nav align-items-xl-center me-3 me-xl-0 d-xl-none">
+          <a class="nav-item nav-link px-0 me-xl-4" href="javascript:void(0)">
+            <i class="bx bx-menu bx-sm"></i>
+          </a>
+        </div>
+
+        <div class="navbar-nav-right d-flex align-items-center" id="navbar-collapse">
+          <!-- Search -->
+          <!-- <div class="navbar-nav align-items-center">
+              <div class="nav-item d-flex align-items-center">
+                <i class="bx bx-search fs-4 lh-0"></i>
+                <input
+                  type="text"
+                  class="form-control border-0 shadow-none"
+                  placeholder="Search..."
+                  aria-label="Search..."
+                />
+              </div>
+            </div> -->
+          <!-- /Search -->
+
+          <ul class="navbar-nav flex-row align-items-center ms-auto">
+            <!-- Place this tag where you want the button to render. -->
+            <li class="nav-item lh-1 me-3">
+
+            </li>
+
+            <!-- User -->
+            <li class="nav-item navbar-dropdown dropdown-user dropdown">
+              <a class="nav-link dropdown-toggle hide-arrow" href="javascript:void(0);" data-bs-toggle="dropdown">
+                <div class="avatar avatar-online">
+                  <img src="../assets/img/O.N.E.png" alt class="w-px-40 h-auto rounded-circle" />
+                </div>
+              </a>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <div class="d-flex">
+                      <div class="flex-shrink-0 me-3">
+                        <div class="avatar avatar-online">
+                          <img src="../assets/img/O.N.E.png" alt class="w-px-40 h-auto rounded-circle" />
+                        </div>
+                      </div>
+                      <div class="flex-grow-1">
+                        <span class="fw-semibold d-block">{{prenom}}</span>
+                        <small class="text-muted"> {{role}} </small>
+                      </div>
+                    </div>
+                  </a>
+                </li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <i class="bx bx-user me-2"></i>
+                    <span class="align-middle">My Profile</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <i class="bx bx-cog me-2"></i>
+                    <span class="align-middle">Settings</span>
+                  </a>
+                </li>
+                <li>
+                  <a class="dropdown-item" href="#">
+                    <span class="d-flex align-items-center align-middle">
+                      <i class="flex-shrink-0 bx bx-credit-card me-2"></i>
+                      <span class="flex-grow-1 align-middle">Billing</span>
+                      <span class="flex-shrink-0 badge badge-center rounded-pill bg-danger w-px-20 h-px-20">4</span>
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <div class="dropdown-divider"></div>
+                </li>
+                <li>
+                  <a class="dropdown-item" (click)="logout()">
+                    <i class="bx bx-power-off me-2"></i>
+                    <span class="align-middle">Déconnecter</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <!--/ User -->
+          </ul>
+        </div>
+      </nav>
+
+      <router-outlet></router-outlet>
+      <section id="basic-footer">
+
+        <footer class="footer bg-light">
+          <div
+            class="container-fluid d-flex flex-md-row flex-column justify-content-between align-items-md-center gap-1 container-p-x py-3">
+            <div>
+              <a href="https://themeselection.com/demo/sneat-bootstrap-html-admin-template/landing/" target="_blank"
+                class="footer-text fw-bolder">O.N.E</a>
+              ©
+            </div>
+
+          </div>
+        </footer>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- / Navbar -->

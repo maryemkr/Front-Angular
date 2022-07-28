@@ -1,0 +1,150 @@
+<div class="content-wrapper">
+  
+    <div class="container-xxl flex-grow-1 container-p-y">
+      
+      <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Membres /</span> Liste des membres</h4>
+      
+      <button type="button" class="btn btn-info" routerLink="/admin/ajoutMembres" style="float:right; margin: 10px;">
+        Ajouter un membre
+      </button>
+      
+      
+        <div class="nav-item d-flex align-items-center">
+          <i class="bx bx-search fs-4 lh-0"></i>
+          <input
+            type="text"
+            class="form-control border-0 shadow-none"
+            placeholder="Search..."
+            aria-label="Search..."
+            [(ngModel)]="term"
+            style="width: 350px; padding:2px ; margin: 10px 0px"
+          />
+        </div>
+      
+      <br>
+      <br><br>
+      <div class="card">
+        <div class="table-responsive text-nowrap">
+            <table class="table table-hover">
+              <thead>
+                <tr>
+                  <th>Pseudo </th>
+                  <th>Email</th>
+                  <th>Prénom</th>
+                  <th>Nom</th>
+                  <th>Téléphone</th>                  
+                  <th>Role</th>                            
+                  <th>Actions</th>
+                </tr>
+              </thead>
+              <tbody class="table-border-bottom-0">
+                <tr *ngFor="let item of dataArray | filter : term | paginate  : {
+                    itemsPerPage: tableSize,
+                    currentPage: page,
+                    totalItems: count
+                  } ; index as i">
+                  <td>{{item.pseudo}}</td>
+                  <td>{{item.email}}</td>
+                  <td>{{item.firstName}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.telephone}}</td>   
+                  <td>{{item.role}}</td>               
+                  
+
+                  <td>
+                    <div class="dropdown">
+                      <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                        <i class="bx bx-dots-vertical-rounded"></i>
+                      </button>
+                      <div class="dropdown-menu">
+    
+    
+                        <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                          data-bs-target="#basicModal"
+                          (click)="getData(item.email,item.firstName,item.name,item.telephone,item._id)"><i
+                            class="bx bx-edit-alt me-1"></i> Modifier</a>
+    
+                        <a class="dropdown-item" href="javascript:void(0);" (click)="delete(item._id, i )"><i
+                            class="bx bx-trash me-1"></i> Supprimer</a>
+                      </div>
+                    </div>
+                  </td>
+                
+                </tr>
+            </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center">
+        <div class="demo-inline-spacing">
+          <nav aria-label="Page navigation">
+            <ul class="pagination">
+  
+              <pagination-controls previousLabel="Précédent" nextLabel="Suivant" (pageChange)="onTableDataChange($event)">
+              </pagination-controls>
+            </ul>
+          </nav>
+        </div>
+      </div>
+      <!--/ Hoverable Table rows -->
+    </div>
+  </div>
+  <div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel1" style="margin: 0;"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form #f="ngForm">
+  
+            <div class="row">
+              <div class="col mb-0">
+                <label for="emailBasic" class="form-label">Email</label>
+                <input type="text" id="emailBasic" class="form-control" [(ngModel)]="data.email"
+                  placeholder="name@example.com" required name="email" #email="ngModel" ngModel />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <label for="nameBasic" class="form-label">Prénom</label>
+                <input type="text" id="nameBasic" class="form-control" [(ngModel)]="data.firstName" placeholder="Prénom"
+                  required name="firstName" #firstName="ngModel" ngModel />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <label for="nameBasic" class="form-label">Nom</label>
+                <input type="text" id="nameBasic" class="form-control" [(ngModel)]="data.name" placeholder="Nom" required
+                  name="name" #name="ngModel" ngModel />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <label for="nameBasic" class="form-label">Téléphone</label>
+                <input type="text" id="nameBasic" class="form-control" [(ngModel)]="data.telephone" required
+                  name="telephone" #telephone="ngModel" ngModel />
+              </div>
+            </div>
+            
+           
+            <div class="alert alert-success" *ngIf="messageSuccess">{{messageSuccess}}</div>
+  
+            <button (click)="update(f)" type="button" class="btn btn-primary">Enregistrer</button>
+  
+          </form>
+        </div>
+  
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            Fermer
+          </button>
+  
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  <script src="/assets/js/ui-modals.js"></script>

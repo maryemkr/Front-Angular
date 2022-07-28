@@ -1,0 +1,183 @@
+<div class="content-wrapper">
+    <!-- Content -->
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light"> <a routerLink="/admin/paiement">Paiements </a> /</span> Liste des paiements Espèce</h4>
+           
+        <hr class="m-0" />
+
+        <!-- Outline Dropdowns -->
+        <div class="card-body">
+          <div class="demo-inline-spacing">
+           
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-outline-warning dropdown-toggle"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+              >
+                Plus Des Détails
+              </button>
+              <ul class="dropdown-menu">                
+                <li><a class="dropdown-item" href="javascript:void(0);" routerLink="/admin/ListPayCheck" >Liste Paiement Par Chèque</a></li>
+                <li>
+                  <hr class="dropdown-divider" />
+                </li>
+                <li><a class="dropdown-item" href="javascript:void(0);" routerLink="/admin/ListPayCash" >Liste Paiement Espèce</a></li>
+              </ul>
+            </div>
+
+           
+          </div>
+        </div>
+        <button type="button" class="btn btn-info" routerLink="/admin/ajoutPayCash" style="float:right; margin: 10px;">
+          Ajout Paiement Espèce </button>
+          <div class="nav-item d-flex align-items-center">
+            <i class="bx bx-search fs-4 lh-0"></i>
+            <input
+              type="text"
+              class="form-control border-0 shadow-none"
+              placeholder="Search..."
+              aria-label="Search..."
+              [(ngModel)]="term"
+              style="width: 350px; padding:2px ; margin: 10px 0px"
+            />
+          </div>
+          <br>
+          <br><br>
+        <div class="card">
+
+            <div class="table-responsive text-nowrap">
+                <table class="table table-hover">
+                    <thead>
+                        <tr>
+                            <th>Entreprise</th>
+                            <th>Méthode</th>
+                            <th>Durée(Mois)</th>
+                            <th>Montant(Dinars)</th>                          
+                            <th>Date paiement</th>                           
+                                                    
+                            <th>Action</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody class="table-border-bottom-0">
+                        <tr *ngFor="let item of dataArray   | filter : term | paginate  : {
+                          itemsPerPage: tableSize,
+                          currentPage: page,
+                          totalItems: count
+                        }; index as i">
+                            <td>{{item.entreprise.name}}</td>
+                            <td>{{item.method}}</td>
+                            <td>{{item.duration}}</td>
+                            <td>{{item.amount}}</td>                                                        
+                            <td>{{item.paymentDate | date :'M/d/yy, h:mm a'}}</td>                            
+                           
+                       
+
+                            <td>
+                                <div class="dropdown">
+                                  <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                                    <i class="bx bx-dots-vertical-rounded"></i>
+                                  </button>
+                                  <div class="dropdown-menu">
+                
+                
+                                    <a  class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal" data-bs-target="#basicModal"
+                                    (click)="getData(item.entreprise.name,item.method,item.duration,item.amount,item.paymentDate, item._id)"   
+                                    ><i
+                                        class="bx bx-edit-alt me-1"></i> Modifier</a>
+                
+                                    <a class="dropdown-item" href="javascript:void(0);"  (click)="delete(item._id, i )" ><i class="bx bx-trash me-1"></i> Supprimer</a>
+                                   
+                
+                                  </div>
+                                </div>
+                              </td>
+                        </tr>    
+                    </tbody>
+                    
+  
+                </table>
+            </div>
+        </div>
+        <div class="d-flex justify-content-center">
+          <div class="demo-inline-spacing">
+            <nav aria-label="Page navigation">
+              <ul class="pagination">
+    
+                <pagination-controls previousLabel="Précédent" nextLabel="Suivant" (pageChange)="onTableDataChange($event)">
+                </pagination-controls>
+              </ul>
+            </nav>
+          </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel1" style="margin: 0;" ></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form #f="ngForm" >
+            
+            <div class="row">
+              <div class="col mb-0">
+                <label for="emailBasic" class="form-label">Pseudo </label>
+                <input type="text" id="emailBasic" class="form-control" [(ngModel)]="data.payerPseudo"
+                  placeholder="name@example.com" required name="payerPseudo" #payerPseudo="ngModel" ngModel />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <label for="nameBasic" class="form-label">Méthode</label>
+                <input type="text" id="nameBasic" class="form-control" [(ngModel)]="data.method" placeholder="Prénom"
+                  required name="method" #method="ngModel" ngModel />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <label for="nameBasic" class="form-label">Durée</label>
+                <input type="text" id="nameBasic" class="form-control" [(ngModel)]="data.duration" placeholder="Nom" required
+                  name="duration" #duration="ngModel" ngModel />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <label for="nameBasic" class="form-label">Montant</label>
+                <input type="text" id="nameBasic" class="form-control" [(ngModel)]="data.amount"
+                  placeholder="Téléphone" required name="amount" #amount="ngModel" ngModel />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <label for="nameBasic" class="form-label"> Date payement</label>
+                <input type="date" id="nameBasic" class="form-control" [(ngModel)]="data.paymentDate"
+                  placeholder="Entreprise" required name="paymentDate" #paymentDate="ngModel" ngModel />
+              </div>
+            </div>
+           
+            <div class="alert alert-success" *ngIf="messageSuccess">{{messageSuccess}}</div>
+  
+            <button (click)="update(f)" type="button" class="btn btn-primary">Enregistrer</button>
+  
+          </form>
+        </div>
+  
+  
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+                Fermer
+              </button>
+              
+            </div>
+          
+      </div>
+    </div>
+  </div>
+ 

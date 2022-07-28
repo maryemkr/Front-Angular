@@ -1,0 +1,31 @@
+.chat-messages-show-container{
+    background-color: #cccaca;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+}
+.chat-messages-show-list{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+.chat-messages-create-container{
+    background: #616161;
+    height: 100px;
+    display: flex;
+    justify-content: center;
+}
+input{
+    padding: 12px;
+    margin: 25px 30px;
+    flex: 2;
+}
+button{
+    height: 45px;
+    margin: auto 60px;
+    width: 80px;
+}
+.scrollarea {
+    min-height: 500px;
+  }

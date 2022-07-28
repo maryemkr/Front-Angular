@@ -1,0 +1,167 @@
+<div class="content-wrapper">
+
+    <div class="container-xxl flex-grow-1 container-p-y">
+
+        <h4 class="fw-bold py-3 mb-4"><span class="text-muted fw-light">Evénements /</span> Liste des évenements
+        </h4>
+
+        <button type="button" class="btn btn-info" routerLink="/admin/ajoutEvent" style="float:right; margin: 10px;">
+            Ajouter un évenement
+        </button>
+
+
+        <div class="nav-item d-flex align-items-center">
+            <i class="bx bx-search fs-4 lh-0"></i>
+            <input type="text" class="form-control border-0 shadow-none" placeholder="Search..." aria-label="Search..."
+                [(ngModel)]="term" style="width: 350px; padding:2px ; margin: 10px 0px" />
+        </div>
+
+        <br>
+        <br><br>
+
+        <div class="row row-cols-1 row-cols-md-3 g-4 mb-5">
+            <div *ngFor="let item of dataArray | filter : term | paginate  : {
+            itemsPerPage: tableSize,
+            currentPage: page,
+            totalItems: count
+          }; index as i">
+            <div class="col" >
+                <div class="card h-100">
+                    <img class="card-img-top" [src]="item.image"  />
+                    <div class="card-body">
+
+                        <h1 class="card-title">{{item.name}}</h1>
+                           
+                      
+                        <p class="card-text">
+                            {{item.city}}
+                        </p>
+                        <p class="card-text">
+                            {{item.address}}
+                        </p>
+                        <p class="card-text">
+                            Sera le: {{item.date| date :'M/d/yy, h:mma'}}
+                        </p>
+                        <p class="card-text" [innerHTML]="item.description">
+                            {{item.description}}
+                        </p>
+
+                        <p class="card-text">
+                            <small class="text-muted">Publier le : {{item.createdAt| date :'M/d/yy, h:mma'}}
+
+                            </small>
+                        </p>
+                    </div>
+                    <div class="dropdown">
+                        <button type="button" class="btn p-0 dropdown-toggle hide-arrow" data-bs-toggle="dropdown">
+                            <i class="bx bx-dots-vertical-rounded"></i>
+                        </button>
+                        <div class="dropdown-menu">
+
+
+                            <a class="dropdown-item" href="javascript:void(0);" data-bs-toggle="modal"
+                                data-bs-target="#basicModal" (click)="getData(item.name,item.city,item.address,item.date,item.description,item._id)"><i
+                                    class="bx bx-edit-alt me-1"></i> Modifier</a>
+
+                            <a class="dropdown-item" href="javascript:void(0);" (click)="delete(item._id, i )"><i
+                                    class="bx bx-trash me-1"></i> Supprimer</a>
+
+                                </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="d-flex justify-content-center">
+            <div class="demo-inline-spacing">
+                <nav aria-label="Page navigation">
+                    <ul class="pagination">
+
+                        <pagination-controls previousLabel="Précédent" nextLabel="Suivant"
+                            (pageChange)="onTableDataChange($event)">
+                        </pagination-controls>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+<div class="modal fade" id="basicModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel1" style="margin: 0;"></h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form #f="ngForm">
+          
+            <div class="row">
+              <div class="col mb-0">
+                <label for="emailBasic" class="form-label">Nom</label>
+                <input type="text" id="emailBasic" class="form-control" [(ngModel)]="data.name" required name="name" 
+                  #name="ngModel" ngModel />
+              </div>
+            </div>
+            <div class="alert alert-danger" *ngIf="name.errors?.['required'] && name.touched ">
+                Téléphone doit etre rempli
+              </div>
+            <div class="row">
+              <div class="col mb-3">
+                <label for="nameBasic" class="form-label">Ville</label>
+                <input type="text" id="nameBasic" class="form-control" [(ngModel)]="data.city" required
+                  name="city" #city="ngModel" ngModel />
+              </div>
+            </div>
+  
+            <div class="row">
+              <div class="col mb-3">
+                <label for="nameBasic" class="form-label">Adresse</label>
+                <input type="text" id="nameBasic" class="form-control" [(ngModel)]="data.address" required
+                  name="address" #address="ngModel" ngModel />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col mb-3">
+                <label for="nameBasic" class="form-label">Date</label>
+                <input type="date" id="nameBasic" class="form-control" [(ngModel)]="data.date" required name="date"
+                  #date="ngModel" ngModel />
+              </div>
+            </div>
+          
+    
+     
+            <div class="row">
+              <div class="col mb-3">
+                <label for="nameBasic" class="form-label">Description</label>
+                <div>
+  
+                  <angular-editor [placeholder]="'Entrer la description de lentreprise..'" name="description" #description="ngModel" ngModel 
+                  [(ngModel)]="data.description">
+                  </angular-editor>
+                </div>
+                
+              </div>
+            </div>
+            <div class="alert alert-success" *ngIf="messageSuccess">{{messageSuccess}}</div>
+  
+            <button (click)="update(f)" type="button" class="btn btn-primary">Enregistrer</button>
+          </form>
+        </div>
+  
+  
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">
+            Fermer
+          </button>
+  
+        </div>
+  
+      </div>
+    </div>
+  </div>
+  
